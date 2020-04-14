@@ -39,23 +39,23 @@
                     </nav>
                 </div>
             </div>
-            <form method="post" action="{{ route('cliente_alt', [ 'id' => $c->id ]) }}">
+            <form method="post" action="{{ route('cliente_alt', [ 'id' => $c->id ]) }}" required>
                 @csrf
                 <div class="form-group mt-5">
                     <h6>Nome Completo</h6>
-                    <input type="text" class="form-control" name="nome" value="{{ $c->nome }}">
+                    <input type="text" class="form-control" name="nome" value="{{ $c->nome }}" required>
                 </div>
                 <div class="form-group">
                     <h6>Endereço</h6>
-                    <input type="text" class="form-control" name="endereco" value="{{ $c->endereco }}">
+                    <input type="text" class="form-control" name="endereco" value="{{ $c->endereco }}" required>
                 </div>
                 <div class="form-group">
                     <h6>CEP</h6>
-                    <input type="text" class="form-control" name="cep" value="{{ $c->cep }}">
+                    <input type="text" class="form-control" name="cep" value="{{ $c->cep }}" required>
                 </div>
                 <div class="form-group">
                     <h6>Cidade</h6>
-                    <input type="text" class="form-control" name="cidade" value="{{ $c->cidade }}">
+                    <input type="text" class="form-control" name="cidade" value="{{ $c->cidade }}" required>
                 </div>
                 <div class="form-group">
                     <h6>Estado</h6>

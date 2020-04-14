@@ -10,43 +10,58 @@ use App\Cliente;
 class VendaController extends Controller
 {
     function adicionar(Request $req){
-        $valor = $req->input('valor');
-        $descricao = $req->input('descricao');
-        $cliente = $req->input('cliente');
+        if(session()->has("usuario")){
+            $valor = $req->input('valor');
+            $descricao = $req->input('descricao');
+            $cliente = $req->input('cliente');
 
-        
-        $venda = new Venda();
-        $venda->valor = $valor;
-        $venda->id_cliente = $cliente;
-        $venda->descricao = $descricao;
+            
+            $venda = new Venda();
+            $venda->valor = $valor;
+            $venda->id_cliente = $cliente;
+            $venda->descricao = $descricao;
 
-        if($venda->save()){
-            $msg = "Venda registrada com sucesso!";
-            $_SESSION['registrado'] = "Adicionado!";
+            if($venda->save()){
+                $msg = "Venda registrada com sucesso!";
+                $_SESSION['registrado'] = "Adicionado!";
+            }else{
+                $msg = "Venda não registrada!";
+            }
+            $clientes = Cliente::all();
+            return view("tela_cadastro_venda", ["clis" => $clientes]);
         }else{
-            $msg = "Venda não registrada!";
-        }
-        $clientes = Cliente::all();
-        return view("tela_cadastro_venda", ["clis" => $clientes]);
-        
+            return redirect()->route('login');
+        }        
     }
 
     function telaCadastro(){
-        $clientes = Cliente::all();
+        if(session()->has("usuario")){
+            $clientes = Cliente::all();
         
-        return view("tela_cadastro_venda", [ "clis" => $clientes ]);
+            return view("tela_cadastro_venda", [ "clis" => $clientes ]);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     function listarVendas(){
-        $vendas = Venda::all();
+        if(session()->has("usuario")){
+            $vendas = Venda::all();
         
-        return view("lista_vendas", [ "v" => $vendas ]);
+            return view("lista_vendas", [ "v" => $vendas ]);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     function vendasPorCliente($id){
-        $cliente = Cliente::find($id);
+        if(session()->has("usuario")){
+            $cliente = Cliente::find($id);
         
-        return view("vendas_por_cliente", [ "cliente" => $cliente ]);
+            return view("vendas_por_cliente", [ "cliente" => $cliente ]);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
 }

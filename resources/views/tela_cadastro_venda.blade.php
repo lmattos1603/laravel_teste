@@ -41,11 +41,11 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h6>Valor</h6>
-                    <input type="number" class="form-control" name="valor" step="0.01" placeholder="Valor da Venda">
+                    <input type="number" class="form-control" name="valor" step="0.01" placeholder="Valor da Venda" required>
                 </div>
                 <div class="form-group">
                     <h6>Descrição</h6>
-                    <input type="text" class="form-control" name="descricao" placeholder="Descrição da Venda">
+                    <input type="text" class="form-control" name="descricao" placeholder="Descrição da Venda" required>
                 </div>
                 <div class="form-group">
                     <h6>Cliente</h6>

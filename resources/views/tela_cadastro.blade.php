@@ -68,19 +68,19 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h6>Nome Completo</h6>
-                    <input type="text" class="form-control" name="nome" placeholder="Seu nome">
+                    <input type="text" class="form-control" name="nome" placeholder="Seu nome" required>
                 </div>
                 <div class="form-group">
                     <h6>Endereço</h6>
-                    <input type="text" class="form-control" name="endereco" placeholder="Seu Endereço">
+                    <input type="text" class="form-control" name="endereco" placeholder="Seu Endereço" required>
                 </div>
                 <div class="form-group">
                     <h6>CEP</h6>
-                    <input type="text" class="form-control" name="cep" placeholder="CEP">
+                    <input type="text" class="form-control" name="cep" placeholder="CEP" required>
                 </div>
                 <div class="form-group">
                     <h6>Cidade</h6>
-                    <input type="text" class="form-control" name="cidade" placeholder="Cidade">
+                    <input type="text" class="form-control" name="cidade" placeholder="Cidade" required>
                 </div>
                 <div class="form-group">
                     <h6>Estado</h6>
@@ -113,6 +113,14 @@
                         <option value="SE">Sergipe (SE)</option>
                         <option value="TO">Tocantins (TO)</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <h6>Login</h6>
+                    <input type="text" class="form-control" name="usuario" placeholder="Digite um usuário">
+                </div>
+                <div class="form-group">
+                    <h6>Senha</h6>
+                    <input type="password" class="form-control" name="senha" placeholder="Digite uma senha">
                 </div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-secondary">Cadastrar</button>

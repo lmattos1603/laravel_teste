@@ -20,6 +20,8 @@ class CreateTableClientes extends Migration
             $table->string('cep', 50);
             $table->string('cidade', 50);
             $table->string('estado', 50);
+            $table->string('usuario', 50);
+            $table->string('senha', 50);
             $table->timestamps();
         });
     }

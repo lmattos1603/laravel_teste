@@ -13,12 +13,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('cliente_cad') }}">Cadastrar Clientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('venda_cad') }}">Cadastrar Venda</a>
-            </li>
+                <?php
+                    if(session()->has("usuario")){
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link">Olá, {{ session("nome") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cliente_cad') }}">Cadastrar Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('venda_cad') }}">Cadastrar Venda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                </li>
+                <?php
+                    }
+                ?>
             </ul>
         </div>
     </nav>

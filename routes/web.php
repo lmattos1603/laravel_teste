@@ -36,3 +36,10 @@ Route::get('/venda/cadastro', 'VendaController@telaCadastro')->name('venda_cad')
 Route::post('/venda/adicionar', 'VendaController@adicionar')->name('venda_add');
 
 Route::get('/venda/listar', 'VendaController@listarVendas')->name('listar_vendas');
+
+
+Route::get('/cliente/logar', 'ClienteController@logar')->name('login');
+
+Route::post('/cliente/login', 'ClienteController@login')->name('logar');
+
+Route::get('/cliente/logout', 'ClienteController@logout')->name('logout');
