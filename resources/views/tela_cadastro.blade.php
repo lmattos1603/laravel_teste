@@ -124,7 +124,6 @@
                 </div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-secondary">Cadastrar</button>
-                    <a href="listar" class="btn btn-secondary ml-3" value="Listar Clientes">Listar Clientes</a>
                 </div>
             </form>
         </div>

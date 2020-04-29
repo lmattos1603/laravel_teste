@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('tela_login');
 });
 
 Route::get('/cliente/cadastro', 'ClienteController@telaCadastro')->name('cliente_cad');
@@ -36,6 +36,18 @@ Route::get('/venda/cadastro', 'VendaController@telaCadastro')->name('venda_cad')
 Route::post('/venda/adicionar', 'VendaController@adicionar')->name('venda_add');
 
 Route::get('/venda/listar', 'VendaController@listarVendas')->name('listar_vendas');
+
+Route::get('/venda/{id}/cadastro_itens', 'VendaController@telaAdicionarItem')->name('cadastro_itens');
+
+Route::post('/venda/{id}/adicionar_itens', 'VendaController@adicionarItem')->name('add_itens');
+
+Route::get('/venda/{id}/remover_itens/{id_pivot}', 'VendaController@excluirItem')->name('delete_itens');
+
+Route::get('/produto/{id}/listar', 'VendaController@listarProdutos')->name('listar_produtos');
+
+Route::get('/produto/cadastro', 'ProdutoController@telaCadastroProduto')->name('produto_cad');
+
+Route::post('/produto/adicionar', 'ProdutoController@cadastroProduto')->name('produto_add');
 
 
 Route::get('/cliente/logar', 'ClienteController@logar')->name('login');

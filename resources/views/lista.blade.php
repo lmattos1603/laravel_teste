@@ -55,7 +55,6 @@
             @endforeach
             </tbody>
         </table>
-        <a href="{{ route('cliente_cad') }}" class="btn btn-secondary">Voltar</a>
 
         <script>
             function exclui(id){

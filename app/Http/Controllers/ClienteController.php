@@ -19,47 +19,39 @@ class ClienteController extends Controller
     }
 
     function telaCadastro(){
-        if(session()->has("usuario")){
-            return view("tela_cadastro");
-        }else{
-            return redirect()->route('login');
-        }
+        return view("tela_cadastro");
     }
 
     function adicionar(Request $req){
-        if(session()->has("usuario")){
-            $nome = $req->input('nome');
-            $endereco = $req->input('endereco');
-            $cep = $req->input('cep');
-            $cidade = $req->input('cidade');
-            $estado = $req->input('estado');
-            $usuario = $req->input('usuario');
-            $senha = $req->input('senha');
+        $nome = $req->input('nome');
+        $endereco = $req->input('endereco');
+        $cep = $req->input('cep');
+        $cidade = $req->input('cidade');
+        $estado = $req->input('estado');
+        $usuario = $req->input('usuario');
+        $senha = $req->input('senha');
 
-            if($nome==null || $endereco==null || $cep==null || $cidade==null || $usuario==null || $senha==null){
-                $_SESSION['vazio'] = "Vazio!";
-                return view("tela_cadastro");
-            }else{
-                $cliente = new Cliente();
-                $cliente->nome = $nome;
-                $cliente->endereco = $endereco;
-                $cliente->cep = $cep;
-                $cliente->cidade = $cidade;
-                $cliente->estado = $estado;
-                $cliente->usuario = $usuario;
-                $cliente->senha = $senha;
-
-                if($cliente->save()){
-                    $msg = "Cliente $nome adicionado com sucesso!";
-                    $_SESSION['adicionado'] = "Adicionado!";
-                }else{
-                    $msg = "Cliente não foi adicionado!";
-                }
-
-                return view("tela_cadastro", ["mensagem" => $msg]);
-            }
+        if($nome==null || $endereco==null || $cep==null || $cidade==null || $usuario==null || $senha==null){
+            $_SESSION['vazio'] = "Vazio!";
+            return view("tela_cadastro");
         }else{
-            return redirect()->route('login');
+            $cliente = new Cliente();
+            $cliente->nome = $nome;
+            $cliente->endereco = $endereco;
+            $cliente->cep = $cep;
+            $cliente->cidade = $cidade;
+            $cliente->estado = $estado;
+            $cliente->usuario = $usuario;
+            $cliente->senha = $senha;
+
+            if($cliente->save()){
+                $msg = "Cliente $nome adicionado com sucesso!";
+                $_SESSION['adicionado'] = "Adicionado!";
+            }else{
+                $msg = "Cliente não foi adicionado!";
+            }
+
+            return view("tela_cadastro", ["mensagem" => $msg]);
         }
     }
 
