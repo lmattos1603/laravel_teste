@@ -5,12 +5,12 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
-    <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <body style="background-image: url(https://guitarload.com.br/wp-content/uploads/2019/01/Parede-Background.jpg)">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <?php
             if(session()->has("usuario")){
         ?>
-        <a class="navbar-brand" href="#">Programa</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Programa</a>
         <?php
             }else{
         ?>
@@ -23,11 +23,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <?php
-                    if(session()->has("usuario")){
-                ?>
                 <li class="nav-item">
-                    <a class="nav-link">Olá, {{ session("nome") }}</a>
+                    <a class="nav-link">Olá</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('venda_cad') }}">Cadastrar Venda</a>
@@ -44,16 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>
-                
-                <?php
-                    }else{
-                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cliente_cad') }}">Cadastrar Clientes</a>
+                    <a class="nav-link" href="{{ route('cliente_cad') }}">Cadastrar Cliente</a>
                 </li>
-                <?php
-                    }
-                ?>
             </ul>
         </div>
     </nav>

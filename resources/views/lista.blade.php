@@ -1,6 +1,6 @@
-@extends('template')
+@extends('layouts.app')
 
-    @section('conteudo')
+    @section('content')
         <?php
             if(isset($_SESSION['excluido'])){ // Se existir a sessão 'adicionado' é carregado uma caixa de diálogo.
         ?>

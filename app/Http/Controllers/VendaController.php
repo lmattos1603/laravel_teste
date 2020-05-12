@@ -11,80 +11,56 @@ use App\Produto;
 class VendaController extends Controller
 {
     function adicionar(Request $req){
-        if(session()->has("usuario")){
-            #$valor = $req->input('valor');
-            $descricao = $req->input('descricao');
-            $cliente = $req->input('cliente');
+        #$valor = $req->input('valor');
+        $descricao = $req->input('descricao');
+        $cliente = $req->input('cliente');
 
-            
-            $venda = new Venda();
-            $venda->valor = 0;
-            $venda->id_cliente = $cliente;
-            $venda->descricao = $descricao;
+        
+        $venda = new Venda();
+        $venda->valor = 0;
+        $venda->id_cliente = $cliente;
+        $venda->descricao = $descricao;
 
-            if($venda->save()){
-                $msg = "Venda registrada com sucesso!";
-                $_SESSION['registrado'] = "Adicionado!";
-                return redirect()->route('cadastro_itens', [ "id" => $venda->id ]);
-            }else{
-                $msg = "Venda não registrada!";
-            }
-            $clientes = Cliente::all();
-            return view("tela_cadastro_venda", ["clis" => $clientes]);
+        if($venda->save()){
+            $msg = "Venda registrada com sucesso!";
+            $_SESSION['registrado'] = "Adicionado!";
+            return redirect()->route('cadastro_itens', [ "id" => $venda->id ]);
         }else{
-            return redirect()->route('login');
-        }        
+            $msg = "Venda não registrada!";
+        }
+        $clientes = Cliente::all();
+        return view("tela_cadastro_venda", ["clis" => $clientes]);       
     }
 
     function telaCadastro(){
-        if(session()->has("usuario")){
-            $clientes = Cliente::all();
-        
-            return view("tela_cadastro_venda", [ "clis" => $clientes ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $clientes = Cliente::all();
+    
+        return view("tela_cadastro_venda", [ "clis" => $clientes ]);
     }
 
     function listarVendas(){
-        if(session()->has("usuario")){
-            $vendas = Venda::all();
-        
-            return view("lista_vendas", [ "v" => $vendas ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $vendas = Venda::all();
+    
+        return view("lista_vendas", [ "v" => $vendas ]);
     }
 
     function vendasPorCliente($id){
-        if(session()->has("usuario")){
-            $cliente = Cliente::find($id);
-        
-            return view("vendas_por_cliente", [ "cliente" => $cliente ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $cliente = Cliente::find($id);
+    
+        return view("vendas_por_cliente", [ "cliente" => $cliente ]);
     }
 
     function listarProdutos($id){
-        if(session()->has("usuario")){
-            $vendas = Venda::find($id);
-        
-            return view("lista_produtos", [ "v" => $vendas ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $vendas = Venda::find($id);
+    
+        return view("lista_produtos", [ "v" => $vendas ]);
     }
 
     function telaAdicionarItem($id){
-        if(session()->has("usuario")){
-            $vendas = Venda::find($id);
-            $produtos = Produto::all();
-        
-            return view("tela_cadastro_itens", [ "vendas" => $vendas, "produtos" => $produtos ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $vendas = Venda::find($id);
+        $produtos = Produto::all();
+    
+        return view("tela_cadastro_itens", [ "vendas" => $vendas, "produtos" => $produtos ]);
     }
 
     function adicionarItem(Request $req, $id){

@@ -1,6 +1,6 @@
-@extends('template')
+@extends('layouts.app')
 
-    @section('conteudo')
+    @section('content')
     <h3>Venda #{{ $v->id }}</h3>
     <table class="table table-striped mt-3">
         <thead class="thead-dark">
