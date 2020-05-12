@@ -1,6 +1,6 @@
-@extends('template')
+@extends('layouts.app')
 
-    @section('conteudo')
+    @section('content')
 
 <body>
 

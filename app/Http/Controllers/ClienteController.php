@@ -6,16 +6,12 @@ use Illuminate\Http\Request;
 use App\Cliente;
 
 
-class ClienteController extends Controller
-{
-    function telaAlteracao($id){
-        if(session()->has("usuario")){
-            $cliente = Cliente::find($id);
+class ClienteController extends Controller{
 
-            return view("tela_alterar_cliente", [ "c" => $cliente ]);
-        }else{
-            return redirect()->route('login');
-        }
+    function telaAlteracao($id){
+        $cliente = Cliente::find($id);
+
+        return view("tela_alterar_cliente", [ "c" => $cliente ]);
     }
 
     function telaCadastro(){
@@ -56,65 +52,57 @@ class ClienteController extends Controller
     }
 
     function listar(){
-        if(session()->has("usuario")){
-            $clientes = Cliente::all();
-            return view("lista", [ "clis" => $clientes ]);
-        }else{
-            return redirect()->route('login');
-        }
+        $clientes = Cliente::all();
+        return view("lista", [ "clis" => $clientes ]);
     }
 
     function alterar(Request $req, $id){
-        if(session()->has("usuario")){
-            $cliente = Cliente::find($id);
+        $cliente = Cliente::find($id);
+    
+
+        $nome = $req->input('nome');
+        $endereco = $req->input('endereco');
+        $cep = $req->input('cep');
+        $cidade = $req->input('cidade');
+        $estado = $req->input('estado');
+        $usuario = $req->input('usuario');
+        $senha = $req->input('senha');
+
         
+        $cliente->nome = $nome;
+        $cliente->endereco = $endereco;
+        $cliente->cep = $cep;
+        $cliente->cidade = $cidade;
+        $cliente->estado = $estado;
+        $cliente->usuario = $usuario;
+        $cliente->senha = $senha;
 
-            $nome = $req->input('nome');
-            $endereco = $req->input('endereco');
-            $cep = $req->input('cep');
-            $cidade = $req->input('cidade');
-            $estado = $req->input('estado');
-            $usuario = $req->input('usuario');
-            $senha = $req->input('senha');
-
-            
-            $cliente->nome = $nome;
-            $cliente->endereco = $endereco;
-            $cliente->cep = $cep;
-            $cliente->cidade = $cidade;
-            $cliente->estado = $estado;
-            $cliente->usuario = $usuario;
-            $cliente->senha = $senha;
-
-            if($cliente->save()){
-                $msg = "Cliente $nome alterado com sucesso!";
-                $_SESSION['alterado'] = "Alterado!";
-            }else{
-                $msg = "Cliente não foi alterado!";
-            }
-
-            return view("tela_alterar_cliente", [ "c" => $cliente ]);
+        if($cliente->save()){
+            $msg = "Cliente $nome alterado com sucesso!";
+            $_SESSION['alterado'] = "Alterado!";
         }else{
-            return redirect()->route('login');
+            $msg = "Cliente não foi alterado!";
         }
+
+        return view("tela_alterar_cliente", [ "c" => $cliente ]);
     }
 
     function excluir($id){
-        if(session()->has("usuario")){
-            $cliente = Cliente::find($id);
+        $cliente = Cliente::find($id);
 
-            if($cliente->delete()){
-                $msg = "Cliente excluído com sucesso!";
-                $_SESSION['excluido'] = "Excluído!";
-            }else{
-                $msg = "Cliente não foi excluído!";
-            }
-            $clientes = Cliente::all();
-            
-            return view("lista", [ "clis" => $clientes ]);
-        }else{
-            return redirect()->route('login');
+        foreach ($cliente->vendas as $v) {
+            $v->delete();
         }
+
+        if($cliente->delete()){
+            $msg = "Cliente excluído com sucesso!";
+            $_SESSION['excluido'] = "Excluído!";
+        }else{
+            $msg = "Cliente não foi excluído!";
+        }
+        $clientes = Cliente::all();
+        
+        return view("lista", [ "clis" => $clientes ]);
     }
 
     function logar(){

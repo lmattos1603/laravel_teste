@@ -1,6 +1,6 @@
-@extends('template')
+@extends('layouts.app')
 
-    @section('conteudo')
+    @section('content')
     <body>
         <?php
             if(isset($_SESSION['vazio'])){ // Se existir a sessão 'vazio' é carregado uma caixa de diálogo.

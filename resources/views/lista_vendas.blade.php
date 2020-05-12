@@ -1,6 +1,6 @@
-@extends('template')
+@extends('layouts.app')
 
-    @section('conteudo')
+    @section('content')
     <?php
         session_start();
             if(isset($_SESSION['registrado'])){ 
